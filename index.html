@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sonam💖</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
+            text-align: center;
+            color: #444;
+            overflow-x: hidden;
+        }
+        /* FLOATING HEARTS */
+        
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 18px;
+            animation: float 7s linear infinite;
+            opacity: .7;
+        }
+        
+        @keyframes float {
+            to {
+                transform: translateY(-110vh);
+                opacity: 0
+            }
+        }
+        /* CARD */
+        
+        .card {
+            background: rgba(255, 255, 255, .75);
+            margin: 35px auto;
+            padding: 25px;
+            border-radius: 25px;
+            max-width: 420px;
+            box-shadow: 0 15px 30px rgba(255, 105, 180, .25);
+        }
+        /* POPUP */
+        
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px 35px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(255, 105, 180, .35);
+            z-index: 2000;
+        }
+        /* GATE */
+        
+        #gate {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, #ffd6e8, #fff);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        /* BUTTONS */
+        
+        button {
+            padding: 10px 26px;
+            border: none;
+            border-radius: 25px;
+            background: #ff7eb3;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: .2s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        /* NO BUTTON */
+        
+        #noBtn {
+            position: absolute;
+            background: #ccc;
+            color: #444;
+        }
+        /* PICKUP */
+        
+        #pickup {
+            font-style: italic;
+            line-height: 1.6;
+        }
+        /* SLIDESHOW */
+        
+        .slideshow img {
+            width: 100%;
+            border-radius: 20px;
+            display: none;
+        }
+        
+        .slideshow img.active {
+            display: block;
+        }
+        /* QUIZ */
+        
+        .option {
+            display: block;
+            margin: 10px auto;
+            width: 240px;
+        }
+        /* PROPOSAL */
+        
+        #proposal {
+            display: none;
+            margin: 50px 0;
+            font-size: 22px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🎵 BACKGROUND MUSIC -->
+    <audio id="music" loop>
+  <!-- 🔴 PUT YOUR SONG LINK HERE -->
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+    <!-- POPUP -->
+    <div id="popup">
+        <p id="popupText"></p>
+        <button onclick="closePopup()">hehe</button>
+    </div>
+
+    <!-- ENTRY GATE -->
+    <div id="gate">
+        <h2>Enter the secret code </h2>
+        <input type="password" id="code">
+        <br><br>
+        <button onclick="checkCode()">Enter Tanu's Heart</button>
+    </div>
+
+    <!-- PICKUP LINE -->
+    <div class="card">
+        <h1>Hey My Lovee 💕</h1>
+        <p id="pickup">
+            I love you more than I love waffles, and you know it! ❤️
+            <br> (Not more than splitsvilla obviously)
+        </p>
+    </div>
+
+    <!-- 📸 YOUR SLIDESHOW (STYLED) -->
+    <div class="card slideshow">
+        <img src="photo1.jpeg" class="active">
+        <img src="photo2.jpeg">
+        <img src="photo3.jpeg">
+        <img src="photo4.jpeg">
+        <img src="photo5.jpeg">
+    </div>
+
+    <!-- VALENTINE QUESTION -->
+    <div class="card">
+        <h2>Will you be my Valentine forever? ❤️</h2>
+        <button onclick="yesClicked()">YES 💖</button>
+        <button id="noBtn" onmouseover="moveNo()">NO 😎</button>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="card" id="quiz" style="display:none;">
+        <h2 id="question"></h2>
+        <div id="options"></div>
+        <p>Score: <span id="score">0</span></p>
+    </div>
+
+    <!-- PROPOSAL -->
+    <div id="proposal">
+        👧💍➡️👦
+        <br> I love you Nilesh Dhongade. ❤️
+        <br> Will you marry me? Humesha? 🥰
+
+    </div>
+
+    <script>
+        /* FLOATING HEARTS */
+        setInterval(() => {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerText = "💗";
+            h.style.left = Math.random() * 100 + "vw";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 7000);
+        }, 350);
+
+        /* POPUP */
+        function showPopup(t) {
+            popupText.innerText = t;
+            popup.style.display = "block";
+        }
+
+        function closePopup() {
+            popup.style.display = "none";
+        }
+
+        /* GATE */
+        function checkCode() {
+            if (code.value === "5555") {
+                showPopup("Hmmm I taught you well 😌");
+                gate.style.display = "none";
+                music.play();
+            } else {
+                showPopup("Shyaaa Breakup! 😤");
+            }
+        }
+
+        /* NO BUTTON */
+        function moveNo() {
+            noBtn.style.left = Math.random() * 80 + "vw";
+            noBtn.style.top = Math.random() * 80 + "vh";
+        }
+
+        /* YES */
+        function yesClicked() {
+            showPopup("Yayyyy!!! I knew it 💖 WHY DID YOU TRY CLICKING ON NO ANYWAY????😤");
+            quiz.style.display = "block";
+            if (i === 0) loadQ();
+        }
+
+        /* SLIDESHOW */
+        let slides = document.querySelectorAll(".slideshow img");
+        let s = 0;
+        setInterval(() => {
+            slides[s].classList.remove("active");
+            s = (s + 1) % slides.length;
+            slides[s].classList.add("active");
+        }, 2500);
+
+        /* QUIZ */
+        const questions = [{
+            q: "Where did we first talk?",
+            o: ["A. Induction", "B. Diwali", "C. Before Diwali", "D. Idk I have a bad memory"],
+            a: 3
+        }, {
+            q: "My favorite thing about you?",
+            o: ["A. Smile", "B. Body", "C. Nature", "D. Height"],
+            a: 1
+        }, {
+            q: "Who fell first?",
+            o: ["A. You", "B. Me", "C. Both", "D. Definitely me"],
+            a: 3
+        }, {
+            q: "My best day with you is : ",
+            o: ["A. Indec Nite", "B. New Year Weekend", "C. Gorai Beach", "D. First date"],
+            a: 0
+        }, {
+            q: "What are you to me?",
+            o: ["A. Cute", "B. Sweet", "C. Hot", "D. Hotttttt"],
+            a: 3
+        }];
+
+        let i = 0,
+            score = 0;
+        const scoreSpan = document.getElementById("score");
+
+        function loadQ() {
+            question.innerText = questions[i].q;
+            options.innerHTML = "";
+            questions[i].o.forEach((opt, idx) => {
+                let b = document.createElement("button");
+                b.className = "option";
+                b.innerText = opt;
+                b.onclick = () => check(idx);
+                options.appendChild(b);
+            });
+        }
+
+        function check(idx) {
+            if (idx === questions[i].a) {
+                score++;
+                scoreSpan.innerText = score;
+                showPopup("Aww 💖");
+                i++;
+                if (i < questions.length) loadQ();
+                else {
+                    showPopup("You are a perfect boyfriend 💖");
+                    proposal.style.display = "block";
+                }
+            } else {
+                showPopup("Hello? R Madhavan, I just broke up with my guy, cz he couldn't answer the question correctly");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
